@@ -19,13 +19,25 @@ import com.ProjetoSpring.demo.entitys.Game;
 @RequestMapping(value = "/lists" )
 public class GameListController {
 
+    
 	@Autowired
 	private GameListService gameListService;
+
+@Autowired
+private GameService gameService;
+  
 	
 
 	@GetMapping
 	public List<GameListDTO> findAll(){
 		List<GameListDTO> result = gameListService.findAll();
 		return result;
+	}
+	
+	@GetMapping(value = "/{listId}/games")
+	public List<GameMinDTO> findByList(@PathVariable long listId){
+	List<GameMinDTO> result = gameService.findByList(listId);
+	return result;
+		
 	}
 }
